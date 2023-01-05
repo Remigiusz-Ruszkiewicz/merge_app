@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       try{
         if(elements.firstWhere((element) => element.index==fromIndex).weight==elements.firstWhere((element) => element.index==toIndex).weight){
-          elements[toIndex] = Element(elements[toIndex].weight*2, Colors.lime, toIndex);
+          elements[toIndex] = Element(elements[toIndex].weight*2, Colors.lime, toIndex,(elements[toIndex].weight*2).toString());
           elements.removeAt(fromIndex);
         }
       }catch(_){
@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  List<Element> elements = [Element(1, Colors.black, 0)];
+  List<Element> elements = [];
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     List<dynamic> rejected,
                                     ) {
                                   return Container(
+                                    child: Text(elements.firstWhere((element) => element.index == index).text),
                                       );
                                 },
                                 onAccept: (int data) {
@@ -174,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           }
                           else{
                             elements.add(
-                              Element(2, Colors.green, i),
+                              Element(2, Colors.green, i,2.toString()),
                             );
                             break;
                           }
@@ -207,9 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Element {
-  Element(this.weight, this.color, this.index);
+  Element(this.weight, this.color, this.index, this.text);
 
   final int index;
   final int weight;
   final Color color;
+  final String text;
 }
